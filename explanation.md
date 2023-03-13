@@ -1,33 +1,34 @@
-1. CREATION OF DOCKER USING DOCKER FILE AND PUSH TO DOCKER HUB
+# 1. CREATION OF DOCKER USING DOCKER FILE AND PUSH TO DOCKER HUB
 
-    Added the Docker file for both Frontend and Backend.
-    Backend
-    FROM node:16.18.1-alpine
-    # Create app directory
-    WORKDIR /usr/src/app/backend
-    # A wildcard is used to ensure both package.json AND package-lock.json are copied
-    COPY package*.json ./
-    #Install app dependencies
-    RUN npm install
-    #Copy the current directory . in the project to the working directory /usr/src/app/backend in the image.
-    COPY . .
-    #Add metadata to the image to describe that the container is listening on port 5000
-    EXPOSE 5000
-    CMD [ "npm", "start" ]
+Choice of the base image is important on which to build each containerand to detarmine the size of the image.
 
-    Frontend
-    FROM node:16.18.1-alpine
-    # Create app directory
-    WORKDIR /usr/src/app/client
-    # A wildcard is used to ensure both package.json AND package-lock.json are copied
-    COPY package*.json ./
-    #Install app dependencies
-    RUN npm install
-    #Copy the current directory . in the project to the working directory /usr/src/app/backend in the image.
-    COPY . .
-    #Add metadata to the image to describe that the container is listening on port 5000
-    EXPOSE 5000
-    CMD [ "npm", "start" ]
+Added the Docker file for both Frontend and Backend.
+Backend
+FROM node:16.18.1-alpine
+# Create app directory
+WORKDIR /usr/src/app/backend
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+COPY package*.json ./
+# Install app dependencies
+RUN npm install
+# Copy the current directory . in the project to the working directory /usr/src/app/backend in the image.
+COPY . .
+# Add metadata to the image to describe that the container is listening on port 5000
+EXPOSE 5000
+CMD [ "npm", "start" ]
+Frontend
+FROM node:16.18.1-alpine
+# Create app directory
+WORKDIR /usr/src/app/client
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+COPY package*.json ./
+# Install app dependencies
+RUN npm install
+# Copy the current directory . in the project to the working directory /usr/src/app/backend in the image.
+COPY . .
+# Add metadata to the image to describe that the container is listening on port 5000
+EXPOSE 5000
+CMD [ "npm", "start" ]
 
 
 

@@ -1,44 +1,33 @@
-1. CREATION OF DOCKER USING DOCKER FILE
+1. CREATION OF DOCKER USING DOCKER FILE AND PUSH TO DOCKER HUB
 
-# Use an official Node runtime as a parent image for the project
-FROM node:latest
+    Added the Docker file for both Frontend and Backend.
+    Backend
+    FROM node:16.18.1-alpine
+    # Create app directory
+    WORKDIR /usr/src/app/backend
+    # A wildcard is used to ensure both package.json AND package-lock.json are copied
+    COPY package*.json ./
+    #Install app dependencies
+    RUN npm install
+    #Copy the current directory . in the project to the working directory /usr/src/app/backend in the image.
+    COPY . .
+    #Add metadata to the image to describe that the container is listening on port 5000
+    EXPOSE 5000
+    CMD [ "npm", "start" ]
 
-# Set the working directory to /app
-WORKDIR /app
+    Frontend
+    FROM node:16.18.1-alpine
+    # Create app directory
+    WORKDIR /usr/src/app/client
+    # A wildcard is used to ensure both package.json AND package-lock.json are copied
+    COPY package*.json ./
+    #Install app dependencies
+    RUN npm install
+    #Copy the current directory . in the project to the working directory /usr/src/app/backend in the image.
+    COPY . .
+    #Add metadata to the image to describe that the container is listening on port 5000
+    EXPOSE 5000
+    CMD [ "npm", "start" ]
 
-# Install MongoDB
-RUN apt-get update && \
-    apt-get install -y mongodb && \
-    rm -rf /var/lib/apt/lists/* && \
-    mkdir -p /data/db && \
-    chown -R mongodb:mongodb /data/db
-
-# Start MongoDB service
-CMD ["sudo", "service", "mongod", "start"]
-
-# Copy the Client folder to the container
-COPY client /myapp/client
-COPY backend /myapp/backend
-
-# Navigate to the Client folder
-WORKDIR /app/client
-
-# Install client dependencies
-RUN npm install
-
-# Start client app
-CMD ["npm", "start"]
-
-# Open a new terminal and run the same commands in the backend folder
-RUN mkdir -p /app/backend
-COPY ./Backend /app/backend
-
-WORKDIR /app/backend
-
-# Install backend dependencies
-RUN npm install
-
-# Start backend app
-CMD ["npm", "start"]
 
 

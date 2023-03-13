@@ -3,6 +3,10 @@ version: '3.3'
 services:
   db:
     image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
       - ./data:/data/db
     ports:
@@ -10,8 +14,8 @@ services:
   server:
     image: docker.io/maamun/backend-docker:v1.0.0
       - "5000:5000"
-    env_file:
-      - ./backend/.env
+    environment:
+      MONGO_URL: mongodb://127.0.0.1:27017/mydb
     networks:
       - yolo-project-network
   

@@ -1,0 +1,35 @@
+---
+- name: Install Git, Docker, and Docker Compose
+  hosts: all
+  become: true
+
+  tasks:
+    # Install Git
+    - name: Install Git
+      apt:
+        name: git
+        state: present
+
+    # Install Docker
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+    
+
+    # Install Docker Compose
+    - name: Install Docker Compose
+      apt:
+        name: docker-compose
+        state: present
+
+    #Running Git clone
+    - name: Clone Git repository
+      git:
+        repo: "https://github.com/Nabhany/yolo"
+        dest: "/home/ubuntu/Desktop/yolo"
+
+    #Running Docker Compose
+    - name: Run Docker Compose file
+      command: docker-compose -f "/home/ubuntu/Desktop/yolo/docker-compose.yaml" up -d
+  

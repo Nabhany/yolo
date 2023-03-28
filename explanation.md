@@ -29,3 +29,18 @@ This will create and start all of your services as containers, running in the ba
 
 # 5. Test your application.
 This can be done by accessing it through the exposed ports or endpoints. Make sure to test communication between your microservices and ensure they are all functioning correctly.
+
+# IP3 Assignment
+
+I have managed to create an automation using ansible using the following steps:
+
+# 6 Creating a Vagrant File
+This file will contain the configuration for your virtual machine. The virtual machine of our chice is UBUNTU.
+
+# 7 Create a new playbook file
+This file defines the tasks you want to run on the virtual machine which on this case we will run the following tasks: 
+i.   Install Git (For cloning this repo to our ubuntu VM).
+ii.  Install Docker 
+iii. Install Docker-compose for running the docker-compose file
+iv.  Run git clone command
+v.   Run docker compose command

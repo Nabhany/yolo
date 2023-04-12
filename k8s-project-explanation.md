@@ -19,6 +19,13 @@ Finally, a Deployment is defined for the frontend client with the same name "cli
 # NetworkPolicy 
 The last resource defined is a NetworkPolicy named "allow-from-yolo-project-network" which allows ingress traffic from pods labeled with "app: frontend" and "app: backend" on ports 3000 and 5000.
 
+#Access of the Client Side on the browser 
+Configuring and using the IP address of the kubernetes cluster
+
+IP Address: http://192.168.40.2:30100
+
+Am still working on port forwarding the IP and i will update with the public ip for access
+
 
 
 
